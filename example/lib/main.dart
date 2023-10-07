@@ -125,7 +125,9 @@ class _MyAppState extends State<MyApp> {
                               "bookId": "2239",
                               "href": "/OEBPS/ch06.xhtml",
                               "created": 1539934158390,
-                              "locations": {"cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"}
+                              "locations": {
+                                "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
+                              }
                             }),
                           );
                         }
@@ -143,17 +145,19 @@ class _MyAppState extends State<MyApp> {
                           nightMode: true,
                         );
                         // get current locator
-                        VocsyEpub.locatorStream.listen((locator) {
-                          print('LOCATOR: $locator');
-                        });
+                        // VocsyEpub.locatorStream.listen((locator) {
+                        //   print('LOCATOR: $locator');
+                        // });
                         await VocsyEpub.openAsset(
                           'assets/4.epub',
-                          lastLocation: EpubLocator.fromJson({
-                            "bookId": "2239",
-                            "href": "/OEBPS/ch06.xhtml",
-                            "created": 1539934158390,
-                            "locations": {"cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"}
-                          }),
+                          // lastLocation: EpubLocator.fromJson({
+                          //   "bookId": "2239",
+                          //   "href": "/OEBPS/ch06.xhtml",
+                          //   "created": 1539934158390,
+                          //   "locations": {
+                          //     "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
+                          //   }
+                          // }),
                         );
                       },
                       child: Text('Open Assets E-pub'),
@@ -169,7 +173,9 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       loading = true;
     });
-    Directory? appDocDir = Platform.isAndroid ? await getExternalStorageDirectory() : await getApplicationDocumentsDirectory();
+    Directory? appDocDir = Platform.isAndroid
+        ? await getExternalStorageDirectory()
+        : await getApplicationDocumentsDirectory();
 
     String path = appDocDir!.path + '/sample.epub';
     File file = File(path);
