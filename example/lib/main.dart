@@ -111,7 +111,7 @@ class _MyAppState extends State<MyApp> {
                             scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
                             allowSharing: true,
                             enableTts: true,
-                            nightMode: true,
+                            nightMode: false,
                           );
 
                           // get current locator
@@ -142,7 +142,7 @@ class _MyAppState extends State<MyApp> {
                           scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
                           allowSharing: true,
                           enableTts: true,
-                          nightMode: true,
+                          nightMode: false,
                         );
                         // get current locator
                         // VocsyEpub.locatorStream.listen((locator) {
