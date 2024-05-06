@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -21,6 +22,7 @@ class _MyAppState extends State<MyApp> {
   bool loading = false;
   Dio dio = Dio();
   String filePath = "";
+  EpubLocator? epubLocator;
 
   @override
   void initState() {
@@ -117,18 +119,14 @@ class _MyAppState extends State<MyApp> {
                           // get current locator
                           VocsyEpub.locatorStream.listen((locator) {
                             print('LOCATOR: $locator');
+                            var data = jsonDecode(locator);
+                            print(data);
+                            epubLocator = EpubLocator.fromJson(data);
                           });
 
                           VocsyEpub.open(
                             filePath,
-                            lastLocation: EpubLocator.fromJson({
-                              "bookId": "2239",
-                              "href": "/OEBPS/ch06.xhtml",
-                              "created": 1539934158390,
-                              "locations": {
-                                "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
-                              }
-                            }),
+                            lastLocation: epubLocator,
                           );
                         }
                       },
@@ -145,19 +143,16 @@ class _MyAppState extends State<MyApp> {
                           nightMode: false,
                         );
                         // get current locator
-                        // VocsyEpub.locatorStream.listen((locator) {
-                        //   print('LOCATOR: $locator');
-                        // });
+                        VocsyEpub.locatorStream.listen((locator) {
+                          print('LOCATOR: $locator');
+                          var data = jsonDecode(locator);
+                          print(data);
+
+                          epubLocator = EpubLocator.fromJson(data);
+                        });
                         await VocsyEpub.openAsset(
-                          'assets/4.epub',
-                          // lastLocation: EpubLocator.fromJson({
-                          //   "bookId": "2239",
-                          //   "href": "/OEBPS/ch06.xhtml",
-                          //   "created": 1539934158390,
-                          //   "locations": {
-                          //     "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
-                          //   }
-                          // }),
+                          'assets/mark_manson_arab.epub',
+                          lastLocation: epubLocator,
                         );
                       },
                       child: Text('Open Assets E-pub'),
